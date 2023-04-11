@@ -1,5 +1,6 @@
 from typing import List, Dict
 import requests
+import os
 
 
 class ModelInterface:
@@ -15,11 +16,15 @@ class ModelInterface:
     def image_generations(self, prompt: str) -> str:
         pass
 
-
 class OpenAIModel(ModelInterface):
+    def __init__(self):
+        self.api_key = os.getenv('OPENAI_API_KEY')
+        self.base_url = 'https://api.openai.com/v1'    
+
+/'''class OpenAIModel(ModelInterface):
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.base_url = 'https://api.openai.com/v1'
+        self.base_url = 'https://api.openai.com/v1' '''/#自定apikey
 
     def _request(self, method, endpoint, body=None, files=None):
         self.headers = {
